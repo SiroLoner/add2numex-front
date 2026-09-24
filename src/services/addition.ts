@@ -1,4 +1,5 @@
 import type { AdditionStep, Calculation, ColumnKind } from '../types'
+import type { Language } from '../i18n'
 
 const placeNames: Array<{ kind: ColumnKind; label: string }> = [
   { kind: 'ones', label: 'Ones' },
@@ -54,10 +55,14 @@ export function buildCalculation(a: number, b: number, total: number): Calculati
   return { a, b, total, steps }
 }
 
-export function describeStep(step: AdditionStep): string {
-  const carryText = step.carryIn > 0 ? ` plus the carried ${step.carryIn}` : ''
+export function describeStep(step: AdditionStep, language: Language = 'en'): string {
+  const carryText = step.carryIn > 0 ? ` ${language === 'vi' ? 'cộng thêm số nhớ' : 'plus the carried'} ${step.carryIn}` : ''
   if (step.subtotal >= 10 && step.carryOut > 0) {
-    return `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Write ${step.resultDigit}, carry ${step.carryOut}.`
+    return language === 'vi'
+      ? `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Viết ${step.resultDigit}, nhớ ${step.carryOut}.`
+      : `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Write ${step.resultDigit}, carry ${step.carryOut}.`
   }
-  return `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Write ${step.resultDigit}.`
+  return language === 'vi'
+    ? `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Viết ${step.resultDigit}.`
+    : `${step.topDigit} + ${step.bottomDigit}${carryText} = ${step.subtotal}. Write ${step.resultDigit}.`
 }

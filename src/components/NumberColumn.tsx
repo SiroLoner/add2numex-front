@@ -1,9 +1,10 @@
 import type { CSSProperties } from 'react'
 import type { Calculation } from '../types'
+import { copy, type Language } from '../i18n'
 
-type NumberColumnProps = { calculation: Calculation }
+type NumberColumnProps = { language?: Language; calculation: Calculation }
 
-export function NumberColumn({ calculation }: NumberColumnProps) {
+export function NumberColumn({ language = 'en', calculation }: NumberColumnProps) {
   const digits = (value: number) => String(value).split('').reverse()
   const topDigits = digits(calculation.a)
   const bottomDigits = digits(calculation.b)
@@ -15,7 +16,7 @@ export function NumberColumn({ calculation }: NumberColumnProps) {
   }
 
   return (
-    <div className="number-board" aria-label={`Vertical addition: ${calculation.a} plus ${calculation.b}`}>
+    <div className="number-board" aria-label={`${copy[language].firstNumber}: ${calculation.a} + ${copy[language].secondNumber}: ${calculation.b}`}>
       <div className="number-row" style={gridStyle}>
         <span className="operator-space" />
         {Array.from({ length: columnCount }, (_, index) => <span className="digit-cell" key={index}>{topDigits[index] ?? ''}</span>).reverse()}
