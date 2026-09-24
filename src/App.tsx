@@ -54,7 +54,7 @@ function App() {
       </section>
       <section className="workspace">
         <div className="input-panel"><div className="panel-intro"><span className="step-tag">{text.startHere}</span><h2>{text.pickTwoNumbers}</h2><p>{text.prompt}</p></div><AdditionForm language={language} a={a} b={b} isLoading={isLoading} onAChange={setA} onBChange={setB} onSubmit={calculate} /><ExampleSelector language={language} onSelect={selectExample} />{error && <ErrorBanner message={error} />}</div>
-        {calculation ? <ResultPanel language={language} calculation={calculation} /> : <section className="empty-panel"><div className="empty-illustration"><span>2</span><span>+</span><span>3</span><strong>?</strong></div><h2>{text.answerWillAppear}</h2><p>{text.enterPrompt}</p><div className="sample-note"><span>{text.tip}</span> {text.try} <button type="button" onClick={() => selectExample(24, 17)}>24 + 17</button> {text.warmUp}</div></section>}
+        {calculation ? <ResultPanel language={language} calculation={calculation} onTryAnother={() => { setCalculation(null); setError('') }} /> : <section className="empty-panel"><div className="empty-illustration"><span>2</span><span>+</span><span>3</span><strong>?</strong></div><h2>{text.answerWillAppear}</h2><p>{text.enterPrompt}</p><div className="sample-note"><span>{text.tip}</span> {text.try} <button type="button" onClick={() => selectExample(24, 17)}>24 + 17</button> {text.warmUp}</div></section>}
       </section>
       <footer><span>{text.madeFor} {text.curiousMinds}</span><span>{text.keepGoing}</span></footer>
     </main>

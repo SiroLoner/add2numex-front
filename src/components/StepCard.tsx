@@ -11,7 +11,7 @@ export function StepCard({ language, step, number }: StepCardProps) {
     <article className={`step-card ${step.kind}`}>
       <div className="step-number">{number}</div>
       <div className="step-copy">
-        <div className="step-heading"><span className="step-dot" />{getPlaceLabel(language, step.kind, step.index)} {text.column}</div>
+        <div className="step-heading"><span className="step-dot" />{language === 'vi' ? `${text.column} ${getPlaceLabel(language, step.kind, step.index)}` : `${getPlaceLabel(language, step.kind, step.index)} ${text.column}`}</div>
         <p>{describeStep(step, language)}</p>
       </div>
       {step.carryOut > 0 && <div className="carry-chip">{text.carry} {step.carryOut}</div>}

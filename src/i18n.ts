@@ -37,6 +37,22 @@ type Copy = {
   invalidInput: string
   tooLarge: string
   apiUnavailable: string
+  guidedTitle: string
+  guidedIntro: string
+  stepQuestion: (a: number, b: number, carry: number) => string
+  writeQuestion: string
+  carryQuestion: string
+  resultPlaceholder: string
+  carryPlaceholder: string
+  checkStep: string
+  nextStep: string
+  previousStep: string
+  showHint: string
+  showAnswer: string
+  tryAnother: string
+  correctFeedback: string
+  incorrectFeedback: string
+  hintText: (subtotal: number) => string
   placeNames: Record<ColumnKind, string>
 }
 
@@ -76,6 +92,22 @@ export const copy: Record<Language, Copy> = {
     invalidInput: 'Please enter a whole number in both boxes so we can add them.',
     tooLarge: 'Those numbers are a little too big. Try numbers with fewer digits.',
     apiUnavailable: 'We could not reach the addition helper. Check the connection and try again.',
+    guidedTitle: 'Your turn',
+    guidedIntro: 'Solve one column, then move to the next one.',
+    stepQuestion: (a, b, carry) => `${a} + ${b}${carry > 0 ? ` + ${carry}` : ''} = ?`,
+    writeQuestion: 'Which digit should we write?',
+    carryQuestion: 'What should we carry?',
+    resultPlaceholder: 'Digit',
+    carryPlaceholder: 'Carry',
+    checkStep: 'Check step',
+    nextStep: 'Next step',
+    previousStep: 'Previous step',
+    showHint: 'Show hint',
+    showAnswer: 'Show answer',
+    tryAnother: 'Try another problem',
+    correctFeedback: 'That is right! You are ready for the next column.',
+    incorrectFeedback: 'Almost there. Take another look at the digits.',
+    hintText: (subtotal) => `Try adding the digits carefully. The total is between 0 and ${subtotal}.`,
     placeNames: { ones: 'Ones', tens: 'Tens', hundreds: 'Hundreds', thousands: 'Thousands' },
   },
   vi: {
@@ -113,6 +145,22 @@ export const copy: Record<Language, Copy> = {
     invalidInput: 'Vui lòng nhập số nguyên vào cả hai ô để chúng ta có thể cộng.',
     tooLarge: 'Hai số hơi lớn. Hãy thử nhập ít chữ số hơn.',
     apiUnavailable: 'Không thể kết nối tới dịch vụ cộng. Hãy kiểm tra kết nối và thử lại.',
+    guidedTitle: 'Đến lượt bạn',
+    guidedIntro: 'Giải một cột rồi chuyển sang cột tiếp theo.',
+    stepQuestion: (a, b, carry) => `${a} + ${b}${carry > 0 ? ` + ${carry}` : ''} = ?`,
+    writeQuestion: 'Bạn sẽ viết chữ số nào?',
+    carryQuestion: 'Bạn sẽ nhớ bao nhiêu?',
+    resultPlaceholder: 'Số',
+    carryPlaceholder: 'Nhớ',
+    checkStep: 'Kiểm tra bước',
+    nextStep: 'Bước tiếp theo',
+    previousStep: 'Bước trước',
+    showHint: 'Xem gợi ý',
+    showAnswer: 'Xem đáp án',
+    tryAnother: 'Thử bài khác',
+    correctFeedback: 'Chính xác! Bạn đã sẵn sàng sang cột tiếp theo.',
+    incorrectFeedback: 'Gần đúng rồi. Hãy nhìn lại các chữ số nhé.',
+    hintText: (subtotal) => `Hãy cộng thật cẩn thận. Tổng sẽ nằm từ 0 đến ${subtotal}.`,
     placeNames: { ones: 'Đơn vị', tens: 'Chục', hundreds: 'Trăm', thousands: 'Nghìn' },
   },
 }
