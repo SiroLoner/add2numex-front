@@ -8,7 +8,7 @@ export function ResultPanel({ calculation }: ResultPanelProps) {
   return (
     <section className="result-panel" aria-live="polite">
       <div className="section-heading">
-        <div><span className="eyebrow">Your math map</span><h2>Let&apos;s add it up</h2></div>
+        <div><h2>Let&apos;s add it up</h2></div>
         <div className="answer-badge"><span>Answer</span><strong>{calculation.total}</strong></div>
       </div>
       <NumberColumn calculation={calculation} />
