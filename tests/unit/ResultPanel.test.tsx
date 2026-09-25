@@ -59,4 +59,30 @@ describe('ResultPanel guided flow', () => {
     expect((screen.getByLabelText(copy.vi.writeQuestion) as HTMLInputElement).value).toBe('1')
     expect((screen.getByLabelText(copy.vi.carryQuestion) as HTMLInputElement).value).toBe('1')
   })
+
+  it('lets the learner watch the teacher guide without answer inputs', () => {
+    renderPanel()
+
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(copy.en.teacherMode) }))
+
+    expect(screen.queryByLabelText(copy.en.writeQuestion)).toBeNull()
+    expect(screen.getByText(copy.en.teacherExplanation(4, 7, 0, 11, 1, 1))).toBeTruthy()
+
+    fireEvent.click(screen.getByRole('button', { name: copy.en.nextStep }))
+    expect(screen.getByText('2 + 1 + 1 = ?')).toBeTruthy()
+    expect(screen.getByText(copy.en.teacherExplanation(2, 1, 1, 4, 4, 0))).toBeTruthy()
+  })
+
+  it('supports previous and show all steps in teacher mode', () => {
+    renderPanel()
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(copy.en.teacherMode) }))
+
+    fireEvent.click(screen.getByRole('button', { name: copy.en.nextStep }))
+    fireEvent.click(screen.getByRole('button', { name: copy.en.previousStep }))
+    expect(screen.getByText('4 + 7 = ?')).toBeTruthy()
+
+    fireEvent.click(screen.getByRole('button', { name: copy.en.showAllSteps }))
+    expect(screen.getByText(copy.en.teacherComplete)).toBeTruthy()
+    expect(screen.getByText('24 + 17 = 41')).toBeTruthy()
+  })
 })

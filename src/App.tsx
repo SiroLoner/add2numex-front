@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AdditionForm } from './components/AdditionForm'
 import { ErrorBanner } from './components/ErrorBanner'
 import { ExampleSelector } from './components/ExampleSelector'
@@ -18,7 +18,23 @@ function App() {
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [language, setLanguage] = useState<Language>('en')
+  const resultPanelRef = useRef<HTMLElement | null>(null)
+  const previousCalculationRef = useRef<Calculation | null>(null)
   const text = copy[language]
+
+  useEffect(() => {
+    if (!calculation || previousCalculationRef.current === calculation) return
+    previousCalculationRef.current = calculation
+
+    const isCompactViewport = typeof window !== 'undefined'
+      && (window.matchMedia?.('(max-width: 850px)').matches ?? window.innerWidth <= 850)
+    if (!isCompactViewport) return
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      resultPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+    return () => window.cancelAnimationFrame(animationFrame)
+  }, [calculation])
 
   const selectExample = (exampleA: number, exampleB: number) => {
     setA(String(exampleA)); setB(String(exampleB)); setError(''); setCalculation(null)
@@ -54,7 +70,7 @@ function App() {
       </section>
       <section className="workspace">
         <div className="input-panel"><div className="panel-intro"><span className="step-tag">{text.startHere}</span><h2>{text.pickTwoNumbers}</h2><p>{text.prompt}</p></div><AdditionForm language={language} a={a} b={b} isLoading={isLoading} onAChange={setA} onBChange={setB} onSubmit={calculate} /><ExampleSelector language={language} onSelect={selectExample} />{error && <ErrorBanner message={error} />}</div>
-        {calculation ? <ResultPanel language={language} calculation={calculation} onTryAnother={() => { setCalculation(null); setError('') }} /> : <section className="empty-panel"><div className="empty-illustration"><span>2</span><span>+</span><span>3</span><strong>?</strong></div><h2>{text.answerWillAppear}</h2><p>{text.enterPrompt}</p><div className="sample-note"><span>{text.tip}</span> {text.try} <button type="button" onClick={() => selectExample(24, 17)}>24 + 17</button> {text.warmUp}</div></section>}
+        {calculation ? <ResultPanel ref={resultPanelRef} language={language} calculation={calculation} onTryAnother={() => { setCalculation(null); setError('') }} /> : <section className="empty-panel"><div className="empty-illustration"><span>2</span><span>+</span><span>3</span><strong>?</strong></div><h2>{text.answerWillAppear}</h2><p>{text.enterPrompt}</p><div className="sample-note"><span>{text.tip}</span> {text.try} <button type="button" onClick={() => selectExample(24, 17)}>24 + 17</button> {text.warmUp}</div></section>}
       </section>
       <footer><span>{text.madeFor} {text.curiousMinds}</span><span>{text.keepGoing}</span></footer>
     </main>
