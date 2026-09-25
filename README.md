@@ -34,7 +34,7 @@ Enter two whole numbers and choose **Calculate**. You can also choose one of the
 The frontend sends a `POST` request to:
 
 ```text
-${VITE_API_URL:-/api/v1/additions}
+${VITE_API_URL:-http://192.168.1.60:8080/api/v1/additions}
 ```
 
 The request body is:
@@ -64,12 +64,16 @@ Network failures, unsuccessful HTTP responses, and unreadable answers are shown 
 
 Configure the API for environments without a same-origin proxy:
 
-```text
-VITE_API_URL=http://localhost:8080/api/v1/additions
-VITE_API_TOKEN=optional-development-token
+Create a local-only `.env.local` file (it is ignored by Git):
+
+```dotenv
+VITE_API_URL=http://192.168.1.60:8080/api/v1/additions
+VITE_API_TOKEN=<the-value-of-ADD2NUM_API_KEY-on-the-backend>
 ```
 
-Never commit a real token. Vite variables are bundled into browser code, so production should use an authenticated backend or same-origin proxy.
+Restart the Vite dev server after changing `.env.local`. The token must exactly match the backend's `ADD2NUM_API_KEY`; otherwise the API returns `401 Unauthorized`.
+
+Never commit a real token. Vite variables are bundled into browser code, so `VITE_API_TOKEN` is only suitable for local development. Production should use an authenticated backend or same-origin proxy.
 
 ## Verification
 

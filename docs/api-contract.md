@@ -2,7 +2,7 @@
 
 ## Endpoint
 
-`POST ${VITE_API_URL}` (defaults to `/api/v1/additions`)
+`POST ${VITE_API_URL}` (defaults to `http://192.168.1.60:8080/api/v1/additions`)
 
 The endpoint is configured through `VITE_API_URL` so environments do not require source changes.
 
@@ -46,5 +46,6 @@ The resolved value must be finite and numeric.
 
 - README currently documents `{a,b}`, while the implementation sends `{firstNumber,secondNumber}`. Choose one contract and update both the frontend and documentation.
 - Authentication must be configured securely. A bearer token must never be committed to source code; `VITE_API_TOKEN` is only suitable for local integration because browser variables are public.
+- For the LAN backend, create an ignored `.env.local` with `VITE_API_TOKEN` set to the exact value configured as `ADD2NUM_API_KEY` on `192.168.1.60`, then restart Vite.
 - Define the expected error response schema and HTTP status mapping.
 - Use an authenticated backend proxy for production deployments.
