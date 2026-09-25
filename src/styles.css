@@ -18,6 +18,22 @@ footer { max-width: 1260px; margin: 31px auto 0; padding: 0 0 25px; color: #a2ae
 
 .number-board { overflow-x: auto; }
 .column-label { white-space: nowrap; }
+.workspace > * { min-width: 0; }
+.result-panel { scroll-margin-top: 18px; }
+.learning-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px auto 0; max-width: 400px; padding: 5px; border: 1px solid #e4eaf5; border-radius: 15px; background: #f5f8ff; }
+.mode-option { display: flex; min-height: 54px; flex-direction: column; align-items: flex-start; justify-content: center; border: 0; border-radius: 10px; padding: 8px 11px; background: transparent; color: var(--muted); text-align: left; }
+.mode-option strong { color: var(--ink); font-size: 11px; }
+.mode-option span { margin-top: 2px; font-size: 10px; line-height: 1.25; }
+.mode-option.active { background: white; box-shadow: 0 3px 10px rgba(68, 95, 151, .1); }
+.mode-option.active strong { color: var(--blue); }
+.mode-option:focus-visible, .guided-actions button:focus-visible, .guided-navigation button:focus-visible { outline: 3px solid #ffd66d; outline-offset: 2px; }
+.teacher-card { border-color: #b8d9cc; background: #f5fcf8; animation: teacher-card-in .35s ease-out; }
+.teacher-explanation { color: var(--ink) !important; background: white; border-left: 4px solid var(--green); border-radius: 8px; padding: 10px 12px; font-size: 13px !important; font-weight: 700; line-height: 1.5; }
+.teacher-feedback { color: #267151 !important; background: var(--green-soft); }
+.digit-cell { transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease; }
+.teacher-card .guided-navigation button:last-child { min-width: 112px; }
+.teacher-card .guided-navigation button:disabled { background: #b9c8bd; color: white; }
+@keyframes teacher-card-in { from { opacity: .45; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 .topbar-actions { display: flex; align-items: center; gap: 8px; }
 .language-button { border: 1px solid #dfe6f3; border-radius: 9px; padding: 8px 10px; background: #fff; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .5px; }
 .language-button:hover { background: var(--blue-soft); }

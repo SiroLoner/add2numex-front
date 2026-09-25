@@ -15,6 +15,13 @@ Add2NumEx is a visual addition practice app for elementary school learners. It a
 7. On failure, the page shows a friendly error message without exposing technical details.
 8. The learner can start another calculation.
 
+After a successful calculation, the result can be viewed in one of two learning modes:
+
+- **Practice:** the learner enters the result digit and carry for each column, then checks the step.
+- **Teacher guide:** the learner enters nothing; the current column is explained and the learner advances with `Next step` or reviews with `Previous step`.
+
+Teacher guide mode reveals one column at a time, starts at the ones column, shows carry values, and provides a `Show all steps` action. It does not auto-advance or make another API request.
+
 ## Input rules
 
 - Both values are required.
@@ -30,6 +37,9 @@ Add2NumEx is a visual addition practice app for elementary school learners. It a
 - Support English and Vietnamese display text.
 - Make loading, success, empty, and error states distinguishable.
 - Keep the calculation explanation aligned by place value.
+- Provide a clear switch between Practice and Teacher guide modes.
+- Use gentle animation and live feedback to explain the active column without relying on color alone.
+- On compact viewports, scroll the newly created result panel into view after a successful calculation; step navigation and language/mode changes must not trigger page scrolling.
 
 ## Calculation behavior
 

@@ -49,7 +49,16 @@ type Copy = {
   previousStep: string
   showHint: string
   showAnswer: string
+  showAllSteps: string
   tryAnother: string
+  learningMode: string
+  practiceMode: string
+  practiceModeDescription: string
+  teacherMode: string
+  teacherModeDescription: string
+  teacherInstruction: (place: string) => string
+  teacherExplanation: (top: number, bottom: number, carry: number, subtotal: number, result: number, carryOut: number) => string
+  teacherComplete: string
   correctFeedback: string
   incorrectFeedback: string
   hintText: (subtotal: number) => string
@@ -104,7 +113,16 @@ export const copy: Record<Language, Copy> = {
     previousStep: 'Previous step',
     showHint: 'Show hint',
     showAnswer: 'Show answer',
+    showAllSteps: 'Show all steps',
     tryAnother: 'Try another problem',
+    learningMode: 'Learning mode',
+    practiceMode: 'Practice',
+    practiceModeDescription: 'You solve each column.',
+    teacherMode: 'Teacher guide',
+    teacherModeDescription: 'Watch one column at a time.',
+    teacherInstruction: (place) => `Watch the ${place.toLowerCase()} column, then press next when you are ready.`,
+    teacherExplanation: (top, bottom, carry, subtotal, result, carryOut) => `${top} + ${bottom}${carry > 0 ? ` + ${carry}` : ''} = ${subtotal}. Write ${result}${carryOut > 0 ? ` and carry ${carryOut}` : ''}.`,
+    teacherComplete: 'Wonderful! We have built the whole answer together.',
     correctFeedback: 'That is right! You are ready for the next column.',
     incorrectFeedback: 'Almost there. Take another look at the digits.',
     hintText: (subtotal) => `Try adding the digits carefully. The total is between 0 and ${subtotal}.`,
@@ -157,7 +175,16 @@ export const copy: Record<Language, Copy> = {
     previousStep: 'Bước trước',
     showHint: 'Xem gợi ý',
     showAnswer: 'Xem đáp án',
+    showAllSteps: 'Xem tất cả các bước',
     tryAnother: 'Thử bài khác',
+    learningMode: 'Chế độ học',
+    practiceMode: 'Tự luyện tập',
+    practiceModeDescription: 'Bạn tự giải từng cột.',
+    teacherMode: 'Giáo viên hướng dẫn',
+    teacherModeDescription: 'Xem từng cột một.',
+    teacherInstruction: (place) => `Hãy nhìn cột ${place.toLowerCase()}, rồi nhấn bước tiếp theo khi bạn sẵn sàng.`,
+    teacherExplanation: (top, bottom, carry, subtotal, result, carryOut) => `${top} + ${bottom}${carry > 0 ? ` + ${carry}` : ''} = ${subtotal}. Viết ${result}${carryOut > 0 ? ` và nhớ ${carryOut}` : ''}.`,
+    teacherComplete: 'Tuyệt vời! Chúng ta đã cùng hoàn thành đáp án.',
     correctFeedback: 'Chính xác! Bạn đã sẵn sàng sang cột tiếp theo.',
     incorrectFeedback: 'Gần đúng rồi. Hãy nhìn lại các chữ số nhé.',
     hintText: (subtotal) => `Hãy cộng thật cẩn thận. Tổng sẽ nằm từ 0 đến ${subtotal}.`,
