@@ -9,7 +9,7 @@ describe('requestAddition', () => {
     vi.stubGlobal('fetch', fetchMock)
 
     await expect(requestAddition(123, 456)).resolves.toBe(579)
-    expect(fetchMock).toHaveBeenCalledWith('/api/v1/additions', expect.objectContaining({
+    expect(fetchMock).toHaveBeenCalledWith('http://192.168.1.60:8080/api/v1/additions', expect.objectContaining({
       method: 'POST',
       body: JSON.stringify({ firstNumber: '123', secondNumber: '456' }),
     }))

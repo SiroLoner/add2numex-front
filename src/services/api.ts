@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || '/api/v1/additions'
+const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.1.60:8080/api/v1/additions'
 const API_TOKEN = import.meta.env.VITE_API_TOKEN
 
 type AdditionResponse = {
